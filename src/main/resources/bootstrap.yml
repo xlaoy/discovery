@@ -1,3 +1,18 @@
 spring:
   application:
-    name: discovery
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xlaoy/springconfig-repo.git
+          search-paths: /
+          username: xlaoy
+          password: zhangyijun123
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://discovery:123456@127.0.0.1:9920/eureka/,http://discovery:123456@127.0.0.1:9930/eureka/
+  instance:
+    prefer-ip-address: true
