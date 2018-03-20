@@ -8,10 +8,3 @@ spring:
     encoding:
       charset: UTF-8
       force: true
-
-eureka:
-  client:
-    service-url:
-      defaultZone: http://discovery:123456@127.0.0.1:9920/eureka/,http://discovery:123456@127.0.0.1:9930/eureka/
-  instance:
-    prefer-ip-address: true
