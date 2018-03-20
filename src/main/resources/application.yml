@@ -8,6 +8,3 @@ spring:
     encoding:
       charset: UTF-8
       force: true
-
-encrypt:
-  key: wocaofuck

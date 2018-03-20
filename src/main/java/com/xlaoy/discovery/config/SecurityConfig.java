@@ -12,9 +12,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private static final String SYSTEM_API_USER_NAME = "config";
+    private static final String SYSTEM_API_USER_NAME = "discovery";
     private static final String SYSTEM_API_USER_PASSWORD = "123456";
-    private static final String SYSTEM_API_ACCESS_ROLE = "CONFIG_API";
+    private static final String SYSTEM_API_ACCESS_ROLE = "DISCOVERY_API";
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
