@@ -1,6 +1,14 @@
 spring:
   application:
-    name: discovery
+    name: config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/xlaoy/springconfig-repo.git
+          search-paths: /
+          username: xlaoy
+          password: zhangyijun123
 
 eureka:
   client:
