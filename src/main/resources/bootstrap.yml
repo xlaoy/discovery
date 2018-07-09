@@ -1,9 +1,19 @@
 spring:
   application:
     name: discovery
+  cloud:
+    config:
+      uri: http://127.0.0.1:9940
+      username: config
+      password: 123456
+      label: master
+      name: xlaoy
+      profile: dev
 
 eureka:
   client:
+    register-with-eureka: false
+    fetch-registry: false
     service-url:
       defaultZone: http://discovery:123456@127.0.0.1:9920/eureka/
   instance:
