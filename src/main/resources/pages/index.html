@@ -9,15 +9,21 @@
         .cdata {width: 100%; text-align: center; border-collapse: collapse;}
         .cdata td span {padding-left: 20px; padding-right: 20px;}
         .cdata tr td { border:1px solid #a8a8a8; word-break: keep-all;white-space:nowrap; line-height: 40px;}
+        .utitle {display: block; width: 200px; height: 80px; line-height: 80px; text-align: center; font-size: 28px; color: #fbfffb; float: left; cursor: pointer;}
+        .utitle:hover {background: #ffd06d; color: black}
+        .navbar-default {display: none}
     </style>
 </head>
 <body style="margin: 0; padding: 0">
 <div style="width: 100%; height: 80px; background: #ff6620">
-    <div style="width: 200px; height: 80px; line-height: 80px; text-align: center; font-size: 28px; color: #fbfffb">
+    <div id="app_menu" class="utitle">
         应用列表
     </div>
+    <div id="eureka_menu" class="utitle">
+        EUREKA信息
+    </div>
 </div>
-<div style="padding: 20px;">
+<div id="app_panl" style="padding: 20px;">
     <table class="cdata">
         <tr>
             <td width="20%" style="font-weight: bold">服务名称</td>
@@ -40,9 +46,26 @@
         </tr>
     </table>
 </div>
+<div style="clear: both">
+    <div id="erueka_panl" style="display: none"></div>
+</div>
 </body>
 <script type="text/javascript">
 $(document).ready(function(){
+
+    $("#app_menu").css("color", "black");
+
+    $("#app_menu").on("click", function () {
+        location = "/index";
+    });
+
+    $("#eureka_menu").on("click", function () {
+        $("#app_menu").css("color", "#fbfffb");
+        $("#eureka_menu").css("color", "black");
+        $("#app_panl").css("display", "none");
+        $("#erueka_panl").load("/");
+        $("#erueka_panl").show();
+    });
 
     $(".inp").on("click", function () {
         var instanceId = $(this).attr("data");
