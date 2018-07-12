@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,9 @@ import java.util.Map;
 public class SystemController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     @GetMapping("/system/getApplicationList")
     @ApiOperation(response = String.class, value = "获取服务列表")
@@ -50,14 +54,20 @@ public class SystemController {
         if(instanceInfo == null) {
             throw new RuntimeException("实例没找到");
         }
-        InstanceInfo.InstanceStatus instanceStatus = null;
+        String status = "";
         if(statusDTO.getStatus() == 1) {
-            instanceStatus = InstanceInfo.InstanceStatus.UP;
+            status = InstanceInfo.InstanceStatus.UP.name().toLowerCase();
         } else {
-            instanceStatus = InstanceInfo.InstanceStatus.DOWN;
+            status = InstanceInfo.InstanceStatus.DOWN.name().toLowerCase();
         }
-        instanceInfo.setStatus(instanceStatus);
-        logger.info(statusDTO.getInstanceId() + " 设置 " + instanceStatus.name());
+
+        String url = "http://" + instanceInfo.getIPAddr() + ":" + instanceInfo.getPort() + "/actuator/set_instance_status/" + status;
+
+        logger.info("发送设置状态请求：" + url);
+
+        restTemplate.postForObject(url, "", String.class);
+
+        logger.info(statusDTO.getInstanceId() + " 设置 " + status);
         return "ok";
     }
 

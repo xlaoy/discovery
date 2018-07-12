@@ -95,9 +95,11 @@ $(document).ready(function(){
             contentType: "application/json",
             data: JSON.stringify(parma),
             success: function(response) {
+                alert("设置成功");
                 location = "/index";
             },
             error: function(response) {
+                alert("设置失败");
                 location = "/index";
             }
         });
