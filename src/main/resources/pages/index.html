@@ -10,7 +10,7 @@
         .cdata td span {padding-left: 20px; padding-right: 20px;}
         .cdata tr td { border:1px solid #a8a8a8; word-break: keep-all;white-space:nowrap; line-height: 40px;}
         .utitle {display: block; width: 200px; height: 80px; line-height: 80px; text-align: center; font-size: 28px; color: #fbfffb; float: left; cursor: pointer;}
-        .utitle:hover {background: #ffd06d; color: black}
+        .utitle:hover {background: #ffd06d; }
         .navbar-default {display: none}
     </style>
 </head>
@@ -26,10 +26,11 @@
 <div id="app_panl" style="padding: 20px;">
     <table class="cdata">
         <tr>
-            <td width="20%" style="font-weight: bold">服务名称</td>
-            <td width="30%" style="font-weight: bold">实例ID</td>
+            <td width="15%" style="font-weight: bold">服务名称</td>
+            <td width="25%" style="font-weight: bold">实例ID</td>
             <td width="20%" style="font-weight: bold">主机</td>
             <td width="10%" style="font-weight: bold">端口</td>
+            <td width="10%" style="font-weight: bold">应用版本</td>
             <td width="10%" style="font-weight: bold">状态</td>
             <td width="10%" style="font-weight: bold">操作</td>
         </tr>
@@ -38,6 +39,7 @@
             <td th:text="${instance.instanceId}"></td>
             <td th:text="${instance.hostName}"></td>
             <td th:text="${instance.port}"></td>
+            <td th:text="${instance.version}"></td>
             <td th:text="${instance.status}" th:style="${instance.status == 'UP'} ? 'color: #2ec872' : 'color: #ff3631'"></td>
             <td>
                 <input class="inp" th:data="${instance.instanceId}" status="1" type="button" value=" 上线 " th:if="${instance.status != 'UP'}"/>
@@ -91,7 +93,6 @@ $(document).ready(function(){
             async: false,
             type: "POST",
             url: "/system/setApplicationStatus",
-            dataType: "json",
             contentType: "application/json",
             data: JSON.stringify(parma),
             success: function(response) {

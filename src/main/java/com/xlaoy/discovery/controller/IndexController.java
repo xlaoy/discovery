@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -37,6 +38,8 @@ public class IndexController {
                     infoDTO.setHostName("【" + instanceInfo.getHostName()+ "】【" + instanceInfo.getIPAddr() + "】");
                     infoDTO.setPort(instanceInfo.getPort());
                     infoDTO.setStatus(instanceInfo.getStatus().name());
+                    Map<String, String> metadata = instanceInfo.getMetadata();
+                    infoDTO.setVersion(metadata.get("version"));
                     instanceList.add(infoDTO);
                 }
             }
