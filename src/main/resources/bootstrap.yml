@@ -1,20 +1,24 @@
 spring:
   application:
     name: discovery
-  cloud:
-    config:
-      uri: http://127.0.0.1:9940/config
-      username: config
-      password: 123456
-      label: master
-      name: xlaoy
-      profile: dev
+#  cloud:
+#    config:
+#      uri: http://127.0.0.1:9940/config
+#      username: config
+#      password: 123456
+#      label: master
+#      name: xlaoy
+#      profile: dev
 
 eureka:
+  server:
+    enable-self-preservation: false #中小规模下，自我保护模式坑比好处多，所以关闭它
+    use-read-only-response-cache: false #禁用readOnlyCacheMap
+    eviction-interval-timer-in-ms: 5000
   client:
     register-with-eureka: false
     fetch-registry: false
     service-url:
-      defaultZone: http://discovery:123456@127.0.0.1:9200/eureka/
+      defaultZone: http://discovery:123456@127.0.0.1:5200/eureka/
   instance:
     prefer-ip-address: true
